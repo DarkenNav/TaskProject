@@ -8,7 +8,7 @@
 </style>
 
 
-<h1>New Task</h1>
+<h1>Task #@Model.Id</h1>
 <form method="post" class="create-task-form">
     <fieldset>
         <div class="form-element">
@@ -16,14 +16,21 @@
             <input type="text" name="Subject" value="@Model.Subject" />
         </div>
         <div>
-            <label for="Contractor">Contractor</label>
-            <select name="Contractor">
-                <option value="1" selected="selected"> User 1 </option>
-                <option value="2"> User 2 </option>
-                <option value="3"> User 3 </option>
-                <option value="4"> User 4 </option>
-                <option value="5"> User 5 </option>
-                <option value="6"> User 6 </option>
+            <label for="ContractorId">Contractor</label>
+            <select name="ContractorId">
+                @{
+                    foreach (var contractor in Model.Contractors)
+                    {
+                        if (Model.Contractor.Id == contractor.Id)
+                        {
+                            <option value="@contractor.Id" selected="selected"> @contractor.Name </option>
+                        }
+                        else
+                        {
+                            <option value="@contractor.Id"> @contractor.Name </option>
+                        }
+                    }
+                }
             </select>
         </div>
         <div>

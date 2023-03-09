@@ -41,14 +41,16 @@ namespace TaskWebProject.Controllers
                 ContractorId = task.ContractorId
             });
 
-            return RedirectToAction("Edit", new { taskId });
+            return RedirectToAction("Edit", new { id = taskId });
         }
 
         [HttpGet]
-        public IActionResult Edit(int taskId)
+        public IActionResult Edit(int id)
         {
-            var task = _taskService.Get(taskId);
-            var taskModel = new TaskViewModel(task);
+            var task = _taskService.Get(id);
+            var users = _userService.GetTestUsersList();
+
+            var taskModel = new TaskViewModel(task, users);
 
             return View(taskModel);
         }
@@ -62,10 +64,10 @@ namespace TaskWebProject.Controllers
                 Id = task.Id,
                 Subject = task.Subject,
                 Description = task.Description,
-                ContractorId = task.Contractor.Id
+                ContractorId = task.ContractorId
             });
 
-            return RedirectToAction("Edit", new { taskId });
+            return RedirectToAction("Edit", new { id = taskId });
         }
 
     }
