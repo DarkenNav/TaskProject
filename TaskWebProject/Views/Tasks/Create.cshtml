@@ -1,0 +1,41 @@
+﻿@{
+    
+}
+
+<style>
+    .create-task-form div
+    {
+        margin-bottom: 10px;
+    }
+
+</style>
+
+
+<h1>New Task</h1>
+<form method="post" class="create-task-form">
+    <fieldset>
+        <div class="form-element">
+            <label for="Subject">Subject</label>
+            <input type="text" name="Subject" value="" />
+        </div>
+        <div>
+            <label for="Contractor">Contractor</label>
+            <select name="Contractor">
+                <option value="1" selected="selected"> User 1 </option>
+                <option value="2"> User 2 </option>
+                <option value="3"> User 3 </option>
+                <option value="4"> User 4 </option>
+                <option value="5"> User 5 </option>
+                <option value="6"> User 6 </option>
+            </select>
+        </div>
+        <div>
+            <label for="Description">Description</label>
+            <textarea cols="50" rows="10" name="Description" value=""></textarea>
+        </div>
+        <div>
+            <label>Create</label>
+            <input type="submit" value="Submit" class="submit" />
+        </div>
+    </fieldset>
+</form>
