@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskWebProject", "TaskWebProject\TaskWebProject.csproj", "{84A75DA7-EF10-4790-A792-D3BBE6294B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskWebProject", "TaskWebProject\TaskWebProject.csproj", "{84A75DA7-EF10-4790-A792-D3BBE6294B7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskApiProject", "TaskApiProject\TaskApiProject.csproj", "{52E3A3D8-96BA-4D44-9C26-E0F93546B8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskApiProject", "TaskApiProject\TaskApiProject.csproj", "{52E3A3D8-96BA-4D44-9C26-E0F93546B8E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{B42D26F7-E84F-4172-8508-EF90F3ED55FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C9A3B578-82D7-413F-A9EE-F970EC121393}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5B44492E-37E1-4F7B-84AD-2EACB23D75B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProject.LairLogic", "TaslProject.LairLogic\TaskProject.LairLogic.csproj", "{F67DF8C1-A458-4D58-AFE0-F691187CC3BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +27,10 @@ Global
 		{52E3A3D8-96BA-4D44-9C26-E0F93546B8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52E3A3D8-96BA-4D44-9C26-E0F93546B8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52E3A3D8-96BA-4D44-9C26-E0F93546B8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F67DF8C1-A458-4D58-AFE0-F691187CC3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67DF8C1-A458-4D58-AFE0-F691187CC3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67DF8C1-A458-4D58-AFE0-F691187CC3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67DF8C1-A458-4D58-AFE0-F691187CC3BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

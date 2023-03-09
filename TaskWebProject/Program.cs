@@ -1,7 +1,12 @@
+using TaskProject.LairLogic;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<TaskService>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

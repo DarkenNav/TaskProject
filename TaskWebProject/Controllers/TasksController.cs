@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
-using System.Xml.Linq;
+using TaskProject.LairLogic;
 using TaskWebProject.Models.Tasks;
 
 namespace TaskWebProject.Controllers
 {
     public class TasksController : Controller
     {
+        private readonly TaskService _taskService;
+        private readonly UserService _userService;
+
+        public TasksController(TaskService taskService, UserService userService)
+        {
+            _taskService = taskService;
+            _userService = userService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -14,9 +22,10 @@ namespace TaskWebProject.Controllers
 
         [HttpGet]
         public IActionResult Create() 
-        { 
-        
-            return View();
+        {
+            var model = new TaskNewViewModel(_userService.GetTestUsersList());
+
+            return View(model);
         }
 
         [HttpPost]
