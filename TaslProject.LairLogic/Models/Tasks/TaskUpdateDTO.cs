@@ -1,7 +1,16 @@
-﻿namespace TaskWebProject.Models.Tasks
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TaskProject.LairLogic.Models.Users;
+
+namespace TaskProject.LairLogic.Models.Tasks
 {
-    public class TaskCreateViewModel
+    public class TaskUpdateDTO
     {
+
+        public int Id { get; set; }
         /// <summary>
         /// Заголовок
         /// </summary>

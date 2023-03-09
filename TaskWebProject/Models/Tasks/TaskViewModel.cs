@@ -1,4 +1,7 @@
-﻿namespace TaskWebProject.Models.Tasks
+﻿using TaskProject.LairLogic.Models.Tasks;
+using TaskWebProject.Models.Users;
+
+namespace TaskWebProject.Models.Tasks
 {
     public class TaskViewModel
     {
@@ -15,12 +18,26 @@
         /// <summary>
         /// Исполнитель задачи
         /// </summary>
-        public int Contractor { get; set; }
+        public UserViewModel Contractor { get; set; }
 
         /// <summary>
         /// Описание задачи
         /// </summary>
         public string Description { get; set; }
+
+
+        public TaskViewModel() { }
+
+        public TaskViewModel(TaskDTO task) 
+        {
+            Id = task.Id;
+            Subject = task.Subject;
+            if (task.Contractor != null)
+            {
+                Contractor = new UserViewModel(task.Contractor);
+            }
+            Description = task.Description;
+        }
 
     }
 }

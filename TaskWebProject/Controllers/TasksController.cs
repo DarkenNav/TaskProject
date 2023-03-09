@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskProject.LairLogic;
+using TaskProject.LairLogic.Models.Tasks;
+using TaskProject.LairLogic.Models.Users;
 using TaskWebProject.Models.Tasks;
 
 namespace TaskWebProject.Controllers
@@ -23,7 +25,8 @@ namespace TaskWebProject.Controllers
         [HttpGet]
         public IActionResult Create() 
         {
-            var model = new TaskNewViewModel(_userService.GetTestUsersList());
+            var users = _userService.GetTestUsersList();
+            var model = new TaskNewViewModel(users);
 
             return View(model);
         }
@@ -31,7 +34,12 @@ namespace TaskWebProject.Controllers
         [HttpPost]
         public IActionResult Create(TaskCreateViewModel task)
         {
-            var taskId = 1;
+            var taskId = _taskService.Create(new TaskCreateDTO() 
+            { 
+                Subject = task.Subject,
+                Description = task.Description,
+                ContractorId = task.ContractorId
+            });
 
             return RedirectToAction("Edit", new { taskId });
         }
@@ -39,21 +47,25 @@ namespace TaskWebProject.Controllers
         [HttpGet]
         public IActionResult Edit(int taskId)
         {
-            var task = new TaskViewModel() { 
-                Id = taskId, 
-                Contractor = 2, 
-                Description = "Good day", 
-                Subject="Hello"
-            };
+            var task = _taskService.Get(taskId);
+            var taskModel = new TaskViewModel(task);
 
-            return View(task);
+            return View(taskModel);
         }
 
         [HttpPost]
         public IActionResult Edit(TaskViewModel task)
         {
 
-            return View(task);
+            var taskId = _taskService.Update(new TaskUpdateDTO()
+            {
+                Id = task.Id,
+                Subject = task.Subject,
+                Description = task.Description,
+                ContractorId = task.Contractor.Id
+            });
+
+            return RedirectToAction("Edit", new { taskId });
         }
 
     }
