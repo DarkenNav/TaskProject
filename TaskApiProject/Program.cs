@@ -1,3 +1,6 @@
+using TaskProject.DAL.Repositories.Abstact;
+using TaskProject.DAL.Repositories;
+using TaskProject.DAL;
 using TaskProject.LairLogic;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
 builder.Services.AddScoped<TaskListService>();
 
-builder.Services.AddSingleton<UserMockDataService>();
-builder.Services.AddSingleton<TaskMockDataService>();
+builder.Services.AddSingleton<UserMockData>();
+builder.Services.AddSingleton<TaskMockData>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

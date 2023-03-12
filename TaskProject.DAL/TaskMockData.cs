@@ -18,7 +18,7 @@ namespace TaskProject.DAL
 
             for (int i = 1; i < 55; i++)
             {
-                int contractorId = rnd.Next(0, usersCount);
+                int contractorId = rnd.Next(1, usersCount);
                 _tasks.Add(new T.Task()
                 {
                     Id = i,

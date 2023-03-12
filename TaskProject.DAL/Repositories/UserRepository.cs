@@ -17,7 +17,7 @@ namespace TaskProject.DAL.Repositories
 
         public void Delete(int id)
         {
-            var user = _testUserData.Users.SingleOrDefault(x => x.Id == id);
+            var user = _testUserData.Users.FirstOrDefault(x => x.Id == id);
             _testUserData.Users.Remove(user);
         }
 

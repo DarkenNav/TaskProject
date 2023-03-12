@@ -1,56 +1,65 @@
-﻿using System.Diagnostics.Contracts;
-using System.Threading.Tasks;
-using TaskProject.LairLogic.Models;
+﻿using TaskProject.DAL.Repositories;
+using TaskProject.DAL.Repositories.Abstact;
 using TaskProject.LairLogic.Models.Tasks;
+using TaskProject.LairLogic.Models.Users;
+using T = TaskProject.DAL.Domain.Tasks;
 
 namespace TaskProject.LairLogic
 {
     public class TaskService
     {
-        private UserService _userService;
-        private TaskMockDataService _taskMockDataService;
-        public TaskService(UserService userService, TaskMockDataService taskMockDataService) 
+        private IUserRepository _userRepository;
+        private ITaskRepository _taskRepository;
+        public TaskService(IUserRepository userRepository, ITaskRepository taskRepository) 
         {
-            _userService = userService;
-            _taskMockDataService = taskMockDataService;
+            _userRepository = userRepository;
+            _taskRepository = taskRepository;
         }
 
         public TaskDTO Get(int id)
         {
-            var task = _taskMockDataService.Tasks.FirstOrDefault(x => x.Id == id);
-            return task;
+            var task = _taskRepository.Get(id);
+            var contractor = _userRepository.Get(task.ContractorId);
+            return new TaskDTO() { 
+                Id = task.Id,
+                Subject = task.Subject,
+                Contractor = new UserDTO()
+                {
+                    Id = contractor.Id,
+                    Name = contractor.Name
+                },
+                Description = task.Description
+            };
         }
 
-        public int Create(TaskCreateDTO task)
+        public int Create(TaskCreateDTO taskCreate)
         {
-            var contractor = _userService.GetUser(task.ContractorId);
-
-            var newTaskId = _taskMockDataService.Tasks.Count + 1;
-            var newTask = new TaskDTO()
+            var newTask = new T.Task()
             {
-                Id = newTaskId,
-                Contractor = contractor,
-                Description = task.Description,
-                Subject = task.Subject
+                ContractorId = taskCreate.ContractorId,
+                Description = taskCreate.Description,
+                Subject = taskCreate.Subject
             };
 
-            _taskMockDataService.Tasks.Add(newTask);
+            var task = _taskRepository.Save(newTask); 
 
-            return newTask.Id;
+            return task.Id;
         }
 
         public object Update(TaskUpdateDTO taskUpdate)
         {
-            var task = _taskMockDataService.Tasks.FirstOrDefault(x => x.Id == taskUpdate.Id);
+            var newTask = new T.Task()
+            {
+                Id = taskUpdate.Id,
+                ContractorId = taskUpdate.ContractorId,
+                Description = taskUpdate.Description,
+                Subject = taskUpdate.Subject
+            };
 
-            if (task == null)
-                throw new ArgumentException();
-
-            task.Subject = taskUpdate.Subject;
-            task.Description = taskUpdate.Description;
-            task.Contractor = _userService.GetUser(taskUpdate.ContractorId);
+            var task = _taskRepository.Save(newTask);
 
             return task.Id;
+
         }     
 
 

@@ -1,27 +1,30 @@
-﻿using System.Diagnostics.Contracts;
-using System.Threading.Tasks;
-using TaskProject.LairLogic.Models;
+﻿using TaskProject.DAL.Domain.Users;
+using TaskProject.DAL.Repositories;
+using TaskProject.DAL.Repositories.Abstact;
 using TaskProject.LairLogic.Models.Tasks;
+using TaskProject.LairLogic.Models.Users;
 
 namespace TaskProject.LairLogic
 {
     public class TaskListService
     {
-        private UserService _userService;
-        private TaskMockDataService _taskMockDataService;
-        public TaskListService(UserService userService, TaskMockDataService taskMockDataService) 
+        private IUserRepository _userRepository;
+        private ITaskRepository _taskRepository;
+        public TaskListService(IUserRepository userRepository, ITaskRepository taskRepository) 
         {
-            _userService = userService;
-            _taskMockDataService = taskMockDataService;
+            _userRepository = userRepository;
+            _taskRepository = taskRepository;
         }
 
         public TaskListDTO Get(int skip, int take)
         {
-            var result = new TaskListDTO();
-            result.Skip = skip;
-            result.Take = take;
+            var result = new TaskListDTO
+            {
+                Skip = skip,
+                Take = take
+            };
 
-            var count = _taskMockDataService.Tasks.Count;
+            var count = _taskRepository.GetCount(x => true);
             result.TotalCount = count;
 
             if(skip > count)
@@ -30,7 +33,14 @@ namespace TaskProject.LairLogic
                 return result;
             }
 
-            result.Tasks = _taskMockDataService.Tasks.Skip(skip).Take(take).ToList();
+            result.Tasks = _taskRepository
+                .Get(x => true, skip, take)
+                .Select(x => new TaskDTO() {
+                    Id = x.Id,
+                    Subject = x.Subject,
+                    Contractor = UserDTO.Create(_userRepository.Get(x.ContractorId)),   
+                    Description = x.Description
+                }).ToList();
 
             return result;
         }
