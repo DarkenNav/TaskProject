@@ -8,6 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
+builder.Services.AddScoped<TaskListService>();
+
 builder.Services.AddSingleton<UserMockDataService>();
 builder.Services.AddSingleton<TaskMockDataService>();
 

@@ -19,7 +19,7 @@ namespace TaskProject.LairLogic
             Random rnd = new Random();
             var usersCount = _userMockDataService.Users.Count;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 55; i++)
             {
                 int contractorId = rnd.Next(0, usersCount);
                 var contractor = _userMockDataService.Users.FirstOrDefault(x => x.Id == contractorId);

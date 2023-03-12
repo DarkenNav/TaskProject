@@ -1,8 +1,13 @@
-﻿<link rel="stylesheet" href="~/css/task-list.css" asp-append-version="true" />
+﻿@model TaskWebProject.Models.Tasks.TaskListViewModel;
+
+<link rel="stylesheet" href="~/css/task-list.css" asp-append-version="true" />
 
 <div class="text-center">
     <div>
         <a class="" asp-controller="Tasks" asp-action="Create">Create new task</a>
+    </div>
+    <div>
+        Find total @Model.TotalCount tasks.
     </div>
     <div>
         <table border="1" class="task-list-table">
@@ -12,12 +17,24 @@
                 <th>Contractor</th>
                 <th>Description</th>
             </tr>
-            <tr>
-                <td>34,5</td>
-                <td>3,5</td>
-                <td>36</td>
-                <td>23</td>
-            </tr>
+            @foreach(var task in Model.Tasks){
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Subject</td>
+                    <td>@task.ContractorName</td>
+                    <td>@task.Description</td>
+                </tr>
+            }
         </table>
+    </div>
+    <div>
+        @if (Model.CanBack)
+        {
+            <a class="" href="/TaskList/?page=@(Model.Page - 1)">Back</a>
+        }
+        @if (Model.CanForward)
+        {
+            <a class="" href="/TaskList/?page=@(Model.Page + 1)">Forward</a>
+        }
     </div>
 </div>
