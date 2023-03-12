@@ -4,11 +4,11 @@ using TaskWebProject.Models;
 
 namespace TaskWebProject.Controllers
 {
-    public class HomeController : Controller
+    public class TaskListController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TaskListController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public TaskListController(ILogger<TaskListController> logger)
         {
             _logger = logger;
         }

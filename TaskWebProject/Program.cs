@@ -8,6 +8,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
+builder.Services.AddSingleton<UserMockDataService>();
+builder.Services.AddSingleton<TaskMockDataService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=TaskList}/{action=Index}/{id?}");
 
 app.Run();

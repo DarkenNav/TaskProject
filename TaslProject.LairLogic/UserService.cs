@@ -1,15 +1,29 @@
-﻿using TaskProject.LairLogic.Models;
-using TaskProject.LairLogic.Models.Users;
+﻿using TaskProject.LairLogic.Models.Users;
 
 namespace TaskProject.LairLogic
 {
     public class UserService
     {
-        public UserService() { }
+        private UserMockDataService _testUserDataService;
+
+        public UserService(UserMockDataService testUserDataService) 
+        {
+            _testUserDataService = testUserDataService;
+        }
 
         public List<UserDTO> GetTestUsersList() 
         { 
-            return TestData.Users;
+            return _testUserDataService.Users;
+        }
+
+        public UserDTO GetUser(int id)
+        {
+            return _testUserDataService.Users.FirstOrDefault(x => x.Id == id); 
+        }
+
+        public UserDTO GetUserFirstOrDefault()
+        {
+            return _testUserDataService.Users.FirstOrDefault();
         }
     }
 }
