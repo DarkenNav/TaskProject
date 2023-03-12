@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskProject.LairLogic;
 using TaskProject.LairLogic.Models.Tasks;
-using TaskProject.LairLogic.Models.Users;
 using TaskWebProject.Models.Tasks;
 
 namespace TaskWebProject.Controllers
@@ -56,7 +55,7 @@ namespace TaskWebProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(TaskViewModel task)
+        public IActionResult Edit(TaskUpdateViewModel task)
         {
 
             var taskId = _taskService.Update(new TaskUpdateDTO()

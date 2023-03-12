@@ -8,12 +8,10 @@ namespace TaskWebProject.Controllers
 {
     public class TaskListController : Controller
     {
-        private readonly ILogger<TaskListController> _logger;
         private readonly TaskListService _taskListService;
 
-        public TaskListController(ILogger<TaskListController> logger, TaskListService taskListService)
+        public TaskListController(TaskListService taskListService)
         {
-            _logger = logger;
             _taskListService = taskListService;
         }
 
