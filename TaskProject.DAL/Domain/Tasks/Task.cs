@@ -1,8 +1,8 @@
-﻿using TaskProject.LairLogic.Models.Users;
+﻿using TaskProject.DAL.Domain.Users;
 
-namespace TaskProject.LairLogic.Models.Tasks
+namespace TaskProject.DAL.Domain.Tasks
 {
-    public class TaskDTO
+    public class Task
     {
         /// <summary>
         /// Идентификатор задачи
@@ -17,7 +17,7 @@ namespace TaskProject.LairLogic.Models.Tasks
         /// <summary>
         /// Исполнитель задачи
         /// </summary>
-        public UserDTO Contractor { get; set; }
+        public int ContractorId { get; set; }
 
         /// <summary>
         /// Описание задачи
