@@ -1,4 +1,4 @@
-﻿using TaskProject.DAL.Domain.Users;
+﻿using TaskProject.Domain.Models.Users;
 
 namespace TaskProject.LairLogic.Models.Users
 {

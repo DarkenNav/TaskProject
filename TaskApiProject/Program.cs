@@ -1,7 +1,7 @@
-using TaskProject.DAL.Repositories.Abstact;
-using TaskProject.LairLogic;
 using TaskProject.DAL.Repositories.Mock;
 using TaskProject.DAL.Repositories.Mock.Data;
+using TaskProject.Domain.Repositories.Abstact;
+using TaskProject.LairLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 

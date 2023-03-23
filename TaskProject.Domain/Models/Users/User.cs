@@ -1,4 +1,4 @@
-﻿namespace TaskProject.DAL.Domain.Users
+﻿namespace TaskProject.Domain.Models.Users
 {
     public class User
     {
@@ -7,8 +7,8 @@
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
     }
 }

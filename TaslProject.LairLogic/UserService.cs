@@ -1,6 +1,4 @@
-﻿using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories;
-using TaskProject.DAL.Repositories.Abstact;
+﻿using TaskProject.Domain.Repositories.Abstact;
 using TaskProject.LairLogic.Models.Users;
 
 namespace TaskProject.LairLogic

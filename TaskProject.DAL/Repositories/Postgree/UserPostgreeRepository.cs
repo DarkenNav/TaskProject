@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Npgsql;
-using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories.Abstact;
+using TaskProject.Domain.Models.Users;
+using TaskProject.Domain.Repositories.Abstact;
 
 namespace TaskProject.DAL.Repositories.Mock
 {

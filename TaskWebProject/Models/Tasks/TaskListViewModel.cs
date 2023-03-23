@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using TaskProject.LairLogic.Models.Tasks;
+using TaskProject.LairLogic.Models.Users;
 using TaskWebProject.Models.Users;
 
 namespace TaskWebProject.Models.Tasks
@@ -25,10 +26,10 @@ namespace TaskWebProject.Models.Tasks
         public TaskListViewModel(TaskListDTO list, int page, int size)
         {
             Tasks = new List<TaskShortViewModel>();
-            //foreach (TaskDTO task in list.Tasks)
-            //{
-            //    Tasks.Add(new TaskShortViewModel(task));
-            //}
+            foreach (TaskDTO task in list.Tasks)
+            {
+                Tasks.Add(new TaskShortViewModel(task));
+            }
 
             TotalCount = list.TotalCount;
             Page = page;

@@ -1,7 +1,6 @@
-﻿using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories.Abstact;
-using TaskProject.DAL.Repositories.Mock.Data;
-using T = TaskProject.DAL.Domain.Tasks;
+﻿using TaskProject.DAL.Repositories.Mock.Data;
+using TaskProject.Domain.Repositories.Abstact;
+using T = TaskProject.Domain.Models.Tasks;
 
 namespace TaskProject.DAL.Repositories.Mock
 {
@@ -64,6 +63,11 @@ namespace TaskProject.DAL.Repositories.Mock
             task.Subject = item.Subject;
             task.Description = item.Description;
             task.ContractorId = item.ContractorId;
+        }
+
+        public ICollection<T.Task> Get(string search, int skip, int take)
+        {
+            throw new NotImplementedException();
         }
     }
 }

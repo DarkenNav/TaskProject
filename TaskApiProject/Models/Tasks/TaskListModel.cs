@@ -1,4 +1,5 @@
 ﻿using TaskProject.LairLogic.Models.Tasks;
+using TaskProject.LairLogic.Models.Users;
 
 namespace TaskApiProject.Models.Tasks
 {

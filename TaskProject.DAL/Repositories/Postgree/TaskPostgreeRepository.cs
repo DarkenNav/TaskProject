@@ -1,7 +1,7 @@
-﻿using Npgsql;
-using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories.Abstact;
-using T = TaskProject.DAL.Domain.Tasks;
+﻿using Dapper;
+using Npgsql;
+using TaskProject.Domain.Repositories.Abstact;
+using T = TaskProject.Domain.Models.Tasks;
 
 namespace TaskProject.DAL.Repositories.Postgree
 {
@@ -30,19 +30,18 @@ namespace TaskProject.DAL.Repositories.Postgree
             throw new NotImplementedException();
         }
 
-        public ICollection<T.Task> Get(Func<T.Task, bool> where)
+        public ICollection<T.Task> Get(string search, int skip, int take)
         {
-            throw new NotImplementedException();
-        }
+            var searchQuery = string.IsNullOrWhiteSpace(search) ? "" : $"WHERE \"Subject\" ilike '%search%' or \"Description\" ilike '%search%'";
 
-        public ICollection<T.Task> Get(Func<T.Task, bool> where, int skip, int take)
-        {
-            throw new NotImplementedException();
+            var tasks = _connection.Query<T.Task>($"SELECT * FROM public.\"Tasks\" {searchQuery} OFFSET {skip} LIMIT {take}").ToList();
+            return tasks ?? new List<T.Task>();
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
+            var count = _connection.ExecuteScalar<int>($"SELECT count(*) FROM public.\"Tasks\"");
+            return count;
         }
 
         public void Update(T.Task item)

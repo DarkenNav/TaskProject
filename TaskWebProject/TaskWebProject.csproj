@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaskProject.DAL.EF\TaskProject.DAL.EF.csproj" />
     <ProjectReference Include="..\TaskWebProject.PostgresMigrate\TaskWebProject.PostgresMigrate.csproj" />
     <ProjectReference Include="..\TaslProject.LairLogic\TaskProject.LairLogic.csproj" />
   </ItemGroup>

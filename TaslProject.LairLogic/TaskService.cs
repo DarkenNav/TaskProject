@@ -1,8 +1,8 @@
-﻿using TaskProject.DAL.Repositories;
-using TaskProject.DAL.Repositories.Abstact;
+﻿using System.Diagnostics.Contracts;
+using TaskProject.Domain.Repositories.Abstact;
 using TaskProject.LairLogic.Models.Tasks;
 using TaskProject.LairLogic.Models.Users;
-using T = TaskProject.DAL.Domain.Tasks;
+using T = TaskProject.Domain.Models.Tasks;
 
 namespace TaskProject.LairLogic
 {
@@ -19,15 +19,20 @@ namespace TaskProject.LairLogic
         public TaskDTO Get(int id)
         {
             var task = _taskRepository.Get(id);
-            var contractor = _userRepository.Get(task.ContractorId);
+            UserDTO contractor = null;
+            if (task.ContractorId != null && task.ContractorId != 0)
+            {
+                var _contractor = _userRepository.Get(task.ContractorId.Value);
+                contractor = new UserDTO()
+                {
+                    Id = _contractor.Id,
+                    Name = _contractor.Name
+                };
+            }
             return new TaskDTO() { 
                 Id = task.Id,
                 Subject = task.Subject,
-                Contractor = new UserDTO()
-                {
-                    Id = contractor.Id,
-                    Name = contractor.Name
-                },
+                Contractor = contractor,
                 Description = task.Description
             };
         }

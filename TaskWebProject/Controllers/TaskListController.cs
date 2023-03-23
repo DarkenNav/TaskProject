@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TaskProject.DAL.EF;
 using TaskProject.LairLogic;
 using TaskWebProject.Models;
 using TaskWebProject.Models.Tasks;
@@ -10,11 +11,13 @@ namespace TaskWebProject.Controllers
     {
         private readonly TaskListService _taskListService;
         private readonly UserService _userService;
+
         public TaskListController(TaskListService taskListService, 
             UserService userService)
         {
             _taskListService = taskListService;
             _userService = userService;
+
         }
 
         public IActionResult Index([FromQuery(Name = "page")] int page, [FromQuery(Name = "page-size")] int size)
@@ -23,9 +26,6 @@ namespace TaskWebProject.Controllers
                 size = 10;
 
             var skip = page * size;
-
-            var usersCount = _userService.GetAllCount();
-            var user = _userService.Get(1);
 
             var taskList = _taskListService.Get(skip, size);
 

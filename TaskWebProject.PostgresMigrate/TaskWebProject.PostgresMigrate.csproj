@@ -10,6 +10,7 @@
     <None Remove="Scripts\2023-03-15-0000_CreateUserTable.sql" />
     <None Remove="Scripts\2023-03-15-0001_InitData.sql" />
     <None Remove="Scripts\2023-03-15-0002_AddNewColumnToUsers.sql" />
+    <None Remove="Scripts\2023-03-23-0000_AddTestTasks.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\2023-03-15-0002_AddNewColumnToUsers.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Code</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\2023-03-23-0000_AddTestTasks.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Code</SubType>
     </EmbeddedResource>

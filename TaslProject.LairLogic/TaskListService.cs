@@ -1,6 +1,4 @@
-﻿using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories;
-using TaskProject.DAL.Repositories.Abstact;
+﻿using TaskProject.Domain.Repositories.Abstact;
 using TaskProject.LairLogic.Models.Tasks;
 using TaskProject.LairLogic.Models.Users;
 
@@ -24,26 +22,25 @@ namespace TaskProject.LairLogic
                 Take = take
             };
 
-            //var count = _taskRepository.GetCount(x => true);
-            //result.TotalCount = count;
+            var count = _taskRepository.Count();
+            result.TotalCount = count;
 
-            //if (skip > count)
-            //{
-            //    result.Tasks = new List<TaskDTO>();
-            //    return result;
-            //}
+            if (skip > count)
+            {
+                result.Tasks = new List<TaskDTO>();
+                return result;
+            }
 
-            //result.Tasks = _taskRepository
-            //    .Get("", skip, take)
-            //    .Select(x => new TaskDTO()
-            //    {
-            //        Id = x.Id,
-            //        Subject = x.Subject,
-            //        Contractor = UserDTO.Create(_userRepository.Get(x.ContractorId)),
-            //        Description = x.Description
-            //    }).ToList();
-
-            return new TaskListDTO();
+            result.Tasks = _taskRepository
+                .Get(string.Empty, skip, take)
+                .Select(x => new TaskDTO()
+                {
+                    Id = x.Id,
+                    Subject = x.Subject,
+                    Contractor = x.ContractorId == null ? null : UserDTO.Create(_userRepository.Get(x.ContractorId.Value)),
+                    Description = x.Description
+                }).ToList();
+            return result;
         }
    
 

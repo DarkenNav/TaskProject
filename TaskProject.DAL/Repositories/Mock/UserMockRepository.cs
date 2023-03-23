@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Linq.Expressions;
-using TaskProject.DAL.Domain.Users;
-using TaskProject.DAL.Repositories.Abstact;
-using TaskProject.DAL.Repositories.Mock.Data;
+﻿using TaskProject.DAL.Repositories.Mock.Data;
+using TaskProject.Domain.Models.Users;
+using TaskProject.Domain.Repositories.Abstact;
 
 namespace TaskProject.DAL.Repositories.Mock
 {

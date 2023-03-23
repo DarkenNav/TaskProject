@@ -9,11 +9,13 @@ namespace TaskWebProject.Controllers
     {
         private readonly TaskService _taskService;
         private readonly UserService _userService;
+        private readonly UserListService _userListService;
 
-        public TasksController(TaskService taskService, UserService userService)
+        public TasksController(TaskService taskService, UserService userService, UserListService userListService)
         {
             _taskService = taskService;
             _userService = userService;
+            _userListService = userListService;
         }
 
         public IActionResult Index()
@@ -24,8 +26,8 @@ namespace TaskWebProject.Controllers
         [HttpGet]
         public IActionResult Create() 
         {
-            var users = _userService.GetTestUsersList();
-            var model = new TaskNewViewModel(users);
+            var userlist = _userListService.Get(0, 5);
+            var model = new TaskNewViewModel(userlist.Users);
 
             return View(model);
         }
@@ -46,8 +48,6 @@ namespace TaskWebProject.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-                return View("NotFound");
-
             var task = _taskService.Get(id.Value);
             if (task == null)
                 return NotFound(id);

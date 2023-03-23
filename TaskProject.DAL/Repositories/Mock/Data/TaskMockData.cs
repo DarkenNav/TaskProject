@@ -1,4 +1,4 @@
-﻿using T = TaskProject.DAL.Domain.Tasks;
+﻿using T = TaskProject.Domain.Models.Tasks;
 
 namespace TaskProject.DAL.Repositories.Mock.Data
 {

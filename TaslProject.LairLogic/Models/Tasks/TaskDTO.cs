@@ -17,7 +17,7 @@ namespace TaskProject.LairLogic.Models.Tasks
         /// <summary>
         /// Исполнитель задачи
         /// </summary>
-        public UserDTO Contractor { get; set; }
+        public UserDTO? Contractor { get; set; }
 
         /// <summary>
         /// Описание задачи

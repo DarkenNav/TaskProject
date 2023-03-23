@@ -1,6 +1,4 @@
-﻿using TaskProject.DAL.Domain.Users;
-
-namespace TaskProject.DAL.Domain.Tasks
+﻿namespace TaskProject.Domain.Models.Tasks
 {
     public class Task
     {
@@ -17,7 +15,7 @@ namespace TaskProject.DAL.Domain.Tasks
         /// <summary>
         /// Исполнитель задачи
         /// </summary>
-        public int ContractorId { get; set; }
+        public int? ContractorId { get; set; }
 
         /// <summary>
         /// Описание задачи

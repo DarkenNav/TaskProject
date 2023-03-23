@@ -1,7 +1,10 @@
-using TaskProject.DAL.Repositories.Abstact;
+using Microsoft.EntityFrameworkCore;
+using TaskProject.DAL.EF;
+using TaskProject.DAL.EF.Repositories;
 using TaskProject.DAL.Repositories.Mock;
 using TaskProject.DAL.Repositories.Mock.Data;
 using TaskProject.DAL.Repositories.Postgree;
+using TaskProject.Domain.Repositories.Abstact;
 using TaskProject.LairLogic;
 using TaskWebProject.PostgresMigrate;
 
@@ -14,6 +17,7 @@ builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<TaskListService>();
+builder.Services.AddScoped<UserListService>();
 
 var dbType = builder.Configuration["DbConfig:Type"];
 switch (dbType)
@@ -31,6 +35,17 @@ switch (dbType)
         
         builder.Services.AddScoped<IUserRepository, UserMockRepository>();
         builder.Services.AddScoped<ITaskRepository, TaskMockRepository>();
+        break;
+    case "EF":
+        var connectionStringEF = builder.Configuration.GetConnectionString("NpgsqlConnectionString");
+        PostgresMigrator.Migrate(connectionStringEF);
+
+        builder.Services.AddDbContext<PostgreeContext>(
+            options => options.UseNpgsql(connectionStringEF));
+
+
+        builder.Services.AddScoped<ITaskRepository, TaskEFPostgreeRepository>();
+        builder.Services.AddScoped<IUserRepository, UserEFPostgreeRepository>();
         break;
 }
 
