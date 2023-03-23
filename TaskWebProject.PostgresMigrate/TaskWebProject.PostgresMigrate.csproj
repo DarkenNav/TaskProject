@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\2023-03-15-0000_CreateUserTable.sql" />
+    <None Remove="Scripts\2023-03-15-0001_InitData.sql" />
+    <None Remove="Scripts\2023-03-15-0002_AddNewColumnToUsers.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2023-03-15-0000_CreateUserTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\2023-03-15-0002_AddNewColumnToUsers.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Code</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\2023-03-15-0001_InitData.sql">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-core" Version="5.0.10" />
+    <PackageReference Include="dbup-postgresql" Version="5.0.8" />
+  </ItemGroup>
+
+</Project>

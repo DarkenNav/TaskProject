@@ -1,16 +1,25 @@
 ﻿using TaskProject.DAL.Domain.Users;
 using TaskProject.DAL.Repositories.Abstact;
+using TaskProject.DAL.Repositories.Mock.Data;
 using T = TaskProject.DAL.Domain.Tasks;
 
-namespace TaskProject.DAL.Repositories
+namespace TaskProject.DAL.Repositories.Mock
 {
-    public class TaskRepository : ITaskRepository, IRepository<T.Task>
+    public class TaskMockRepository : ITaskRepository, IRepository<T.Task>
     {
         private TaskMockData _taskMockData;
-        public TaskRepository(TaskMockData taskMockData)
+        public TaskMockRepository(TaskMockData taskMockData)
         {
-             _taskMockData = taskMockData;
+            _taskMockData = taskMockData;
         }
+
+        public T.Task Create(T.Task item)
+        {
+            item.Id = _taskMockData.Tasks.Last().Id + 1;
+            _taskMockData.Tasks.Add(item);
+            return item;
+        }
+
         public void Delete(int id)
         {
             var task = _taskMockData.Tasks.SingleOrDefault(x => x.Id == id);
@@ -42,29 +51,19 @@ namespace TaskProject.DAL.Repositories
                 .ToList();
         }
 
-        public int GetCount(Func<T.Task, bool> where)
+        public int Count()
         {
             return _taskMockData
                 .Tasks
-                .Where(where)
                 .Count();
         }
 
-        public T.Task Save(T.Task item)
+        public void Update(T.Task item)
         {
-            if (item.Id <= 0)
-            {
-                item.Id = _taskMockData.Tasks.Last().Id + 1;
-                _taskMockData.Tasks.Add(item);
-                return item;
-            }
-
             var task = _taskMockData.Tasks.SingleOrDefault(x => x.Id == item.Id);
             task.Subject = item.Subject;
             task.Description = item.Description;
             task.ContractorId = item.ContractorId;
-
-            return task;
         }
     }
 }

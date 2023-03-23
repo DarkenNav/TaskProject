@@ -1,6 +1,6 @@
 ﻿using TaskProject.DAL.Domain.Users;
 
-namespace TaskProject.DAL
+namespace TaskProject.DAL.Repositories.Mock.Data
 {
     public class UserMockData
     {

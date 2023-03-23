@@ -1,7 +1,7 @@
 using TaskProject.DAL.Repositories.Abstact;
-using TaskProject.DAL.Repositories;
-using TaskProject.DAL;
 using TaskProject.LairLogic;
+using TaskProject.DAL.Repositories.Mock;
+using TaskProject.DAL.Repositories.Mock.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IUserRepository, UserMockRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskMockRepository>();
 
 builder.Services.AddScoped<TaskListService>();
 

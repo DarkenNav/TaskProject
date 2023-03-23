@@ -44,12 +44,18 @@ namespace TaskWebProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            var task = _taskService.Get(id);
+                return View("NotFound");
+
+            var task = _taskService.Get(id.Value);
+            if (task == null)
+                return NotFound(id);
+
             var users = _userService.GetTestUsersList();
 
             var taskModel = new TaskViewModel(task, users);
+
 
             return View(taskModel);
         }

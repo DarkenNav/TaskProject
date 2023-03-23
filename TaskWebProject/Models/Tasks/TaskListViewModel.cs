@@ -25,10 +25,10 @@ namespace TaskWebProject.Models.Tasks
         public TaskListViewModel(TaskListDTO list, int page, int size)
         {
             Tasks = new List<TaskShortViewModel>();
-            foreach (TaskDTO task in list.Tasks)
-            {
-                Tasks.Add(new TaskShortViewModel(task));
-            }
+            //foreach (TaskDTO task in list.Tasks)
+            //{
+            //    Tasks.Add(new TaskShortViewModel(task));
+            //}
 
             TotalCount = list.TotalCount;
             Page = page;

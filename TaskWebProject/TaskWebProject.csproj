@@ -4,9 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>41e05912-5785-45e3-aa3e-ba7d9758d26a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaskWebProject.PostgresMigrate\TaskWebProject.PostgresMigrate.csproj" />
     <ProjectReference Include="..\TaslProject.LairLogic\TaskProject.LairLogic.csproj" />
   </ItemGroup>
 

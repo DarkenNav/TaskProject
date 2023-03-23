@@ -1,7 +1,9 @@
-using TaskProject.DAL;
-using TaskProject.DAL.Repositories;
 using TaskProject.DAL.Repositories.Abstact;
+using TaskProject.DAL.Repositories.Mock;
+using TaskProject.DAL.Repositories.Mock.Data;
+using TaskProject.DAL.Repositories.Postgree;
 using TaskProject.LairLogic;
+using TaskWebProject.PostgresMigrate;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +13,26 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<UserService>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-
 builder.Services.AddScoped<TaskListService>();
 
-builder.Services.AddSingleton<UserMockData>();
-builder.Services.AddSingleton<TaskMockData>();
+var dbType = builder.Configuration["DbConfig:Type"];
+switch (dbType)
+{
+    case "Postgres":
+        var connectionString = builder.Configuration.GetConnectionString("NpgsqlConnectionString");
+        PostgresMigrator.Migrate(connectionString);
+
+        builder.Services.AddScoped<ITaskRepository, TaskPostgreeRepository>(x => new TaskPostgreeRepository(connectionString));
+        builder.Services.AddScoped<IUserRepository, UserPostgreeRepository>(x => new UserPostgreeRepository(connectionString));
+        break;
+    case "Mock":
+        builder.Services.AddSingleton<UserMockData>();
+        builder.Services.AddSingleton<TaskMockData>();
+        
+        builder.Services.AddScoped<IUserRepository, UserMockRepository>();
+        builder.Services.AddScoped<ITaskRepository, TaskMockRepository>();
+        break;
+}
 
 var app = builder.Build();
 

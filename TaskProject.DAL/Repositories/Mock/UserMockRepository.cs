@@ -2,18 +2,25 @@
 using System.Linq.Expressions;
 using TaskProject.DAL.Domain.Users;
 using TaskProject.DAL.Repositories.Abstact;
+using TaskProject.DAL.Repositories.Mock.Data;
 
-namespace TaskProject.DAL.Repositories
+namespace TaskProject.DAL.Repositories.Mock
 {
-    public class UserRepository : IUserRepository, IRepository<User>
+    public class UserMockRepository : IUserRepository, IRepository<User>
     {
         private UserMockData _testUserData;
 
-        public UserRepository(UserMockData testUserData)
+        public UserMockRepository(UserMockData testUserData)
         {
             _testUserData = testUserData;
         }
 
+        public User Create(User item)
+        {
+            item.Id = _testUserData.Users.Last().Id + 1;
+            _testUserData.Users.Add(item);
+            return item;
+        }
 
         public void Delete(int id)
         {
@@ -46,26 +53,22 @@ namespace TaskProject.DAL.Repositories
                 .ToList();
         }
 
-        public int GetCount(Func<User, bool> where)
+        public ICollection<User> Get(string search, int skip, int take)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Count()
         {
             return _testUserData
                 .Users
-                .Where(where)
                 .Count();
         }
 
-        public User Save(User item)
+        public void Update(User item)
         {
-            if(item.Id <= 0)
-            {
-                item.Id = _testUserData.Users.Last().Id + 1;
-                _testUserData.Users.Add(item);
-                return item;
-            }
-
             var user = _testUserData.Users.SingleOrDefault(x => x.Id == item.Id);
             user.Name = item.Name;
-            return user;
         }
     }
 }

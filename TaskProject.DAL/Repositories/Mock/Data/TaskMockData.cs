@@ -1,6 +1,6 @@
 ﻿using T = TaskProject.DAL.Domain.Tasks;
 
-namespace TaskProject.DAL
+namespace TaskProject.DAL.Repositories.Mock.Data
 {
     public class TaskMockData
     {

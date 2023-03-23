@@ -24,25 +24,26 @@ namespace TaskProject.LairLogic
                 Take = take
             };
 
-            var count = _taskRepository.GetCount(x => true);
-            result.TotalCount = count;
+            //var count = _taskRepository.GetCount(x => true);
+            //result.TotalCount = count;
 
-            if(skip > count)
-            {
-                result.Tasks = new List<TaskDTO>();
-                return result;
-            }
+            //if (skip > count)
+            //{
+            //    result.Tasks = new List<TaskDTO>();
+            //    return result;
+            //}
 
-            result.Tasks = _taskRepository
-                .Get(x => true, skip, take)
-                .Select(x => new TaskDTO() {
-                    Id = x.Id,
-                    Subject = x.Subject,
-                    Contractor = UserDTO.Create(_userRepository.Get(x.ContractorId)),   
-                    Description = x.Description
-                }).ToList();
+            //result.Tasks = _taskRepository
+            //    .Get("", skip, take)
+            //    .Select(x => new TaskDTO()
+            //    {
+            //        Id = x.Id,
+            //        Subject = x.Subject,
+            //        Contractor = UserDTO.Create(_userRepository.Get(x.ContractorId)),
+            //        Description = x.Description
+            //    }).ToList();
 
-            return result;
+            return new TaskListDTO();
         }
    
 

@@ -41,7 +41,7 @@ namespace TaskProject.LairLogic
                 Subject = taskCreate.Subject
             };
 
-            var task = _taskRepository.Save(newTask); 
+            var task = _taskRepository.Create(newTask); 
 
             return task.Id;
         }
@@ -56,9 +56,9 @@ namespace TaskProject.LairLogic
                 Subject = taskUpdate.Subject
             };
 
-            var task = _taskRepository.Save(newTask);
+             _taskRepository.Update(newTask);
 
-            return task.Id;
+            return taskUpdate.Id;
 
         }     
 

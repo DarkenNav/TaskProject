@@ -14,9 +14,15 @@ namespace TaskProject.LairLogic
             _userRepository = userRepository;
         }
 
+        public int GetAllCount()
+        {
+            return _userRepository.Count();
+        }
+
+
         public List<UserDTO> GetTestUsersList() 
         { 
-            var users = _userRepository.Get(x => true);
+            var users = _userRepository.Get("", 0, 20);
             var list = users.Select(x => new UserDTO()
             {
                 Id = x.Id,
@@ -25,7 +31,7 @@ namespace TaskProject.LairLogic
             return list;
         }
 
-        public UserDTO GetUser(int id)
+        public UserDTO Get(int id)
         {
             var user = _userRepository.Get(id);
             return new UserDTO() { 
@@ -36,7 +42,7 @@ namespace TaskProject.LairLogic
 
         public UserDTO GetUserFirstOrDefault()
         {
-            var user = _userRepository.Get(x => true, 0, 1).FirstOrDefault();
+            var user = _userRepository.Get("", 0, 1).FirstOrDefault();
             return new UserDTO()
             {
                 Id = user.Id,
